@@ -1,0 +1,50 @@
+<div>
+  <tabset>
+    <tab heading="Fecha única" (select)="cambio($event)">
+      <app-date-picker [opcion]="'U'" (emision)="obtenerFecha($event)" ></app-date-picker>
+    </tab>
+    <tab heading="Rango de fechas" (select)="cambio($event)">
+      <app-date-picker [opcion]="'M'" (emision)="obtenerFecha($event)"></app-date-picker>
+    </tab>
+  </tabset>
+
+  <table class="table table-striped" [mfData]="pedidos" #mf="mfDataTable" [mfRowsOnPage]="10">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          <mfDefaultSorter>Cliente</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter>Fecha de consumo</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter>Total</mfDefaultSorter>
+        </th>
+        <th class="text-center">
+          <mfDefaultSorter>Ver Detalle</mfDefaultSorter>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ped of mf.data; let i = index" [attr.data-index]="i">
+        <td>{{i + 1}}</td>
+        <td>{{ped.cliente.nombreCompleto | uppercase}}</td>
+        <td class="text-center">{{ped.fechaPedido | date:'dd/MM/yyyy'}}</td>
+        <td class="text-center">{{ped.total | currency: 'S/ '}}</td>
+        <td>
+          <app-simple-modal [titulo]="'Detalle de ' + ped.cliente.nombreCompleto + ' - ' + [ped.fechaPedido | date:'dd/MM/yyyy']  " [labelBoton]="'Ver'" [detalle]="ped.detalle"></app-simple-modal>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

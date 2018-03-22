@@ -1,0 +1,33 @@
+<button type="button" class="btn btn-success btn-sm" (click)="openModal(template)" style="margin-left: 40%">{{labelBoton}}</button>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{titulo}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Plato</th>
+          <th>Cantidad</th>
+          <th>Precio Unitario</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let det of detalle">
+          <td>{{det.plato.nombre}}</td>
+          <td>{{det.cantidad}}</td>
+          <td>{{det.plato.precio}}</td>
+          <td>{{det.plato.precio * det.cantidad }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-danger" (click)="modalRef.hide()">Cerrar</button>
+  </div>
+
+</ng-template>

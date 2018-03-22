@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-xs-10">
+    <div class="row">
+      <div class="col-xs-12">
+        <form>
+          <div class="row">
+            <div class="col-sm-12 form-group">
+              <label for="cliente">Cliente</label>
+              <ng2-completer [(ngModel)]="busquedaCliente" [autofocus]="true" [datasource]="dataServiceCliente" [selectOnClick]="false"
+                (selected)="onClienteSelect($event)" [textSearching]="'Buscando...'" [placeholder]="'Ingrese el nombre o dni de un cliente'"
+                [textNoResults]="'Sin resultados'" [clearUnselected]=true [pause]="250" name="busquedaCliente" [inputClass]="['form-control']"
+                [minSearchLength]="2" [overrideSuggested]=true></ng2-completer>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-5 form-group">
+              <label for="plato">Plato</label>
+              <ng2-completer [(ngModel)]="busqueda" [datasource]="dataService" (selected)="onItemSelect($event)" [textSearching]="'Buscando...'"
+                [placeholder]="'Ingrese el nombre de un plato'" [textNoResults]="'Sin resultados'" [clearUnselected]=true [pause]="250"
+                name="busqueda" [inputClass]="['form-control']" [minSearchLength]="2"></ng2-completer>
+            </div>
+            <div class="col-sm-2 form-group">
+              <label for="cantidad">Cantidad</label>
+              <input type="number" [(ngModel)]="cantidad" id="cantidad" name="cantidad" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-10">
+              <div class="alert alert-warning" *ngIf="flagMensaje">
+                Debe agregar un plato y cantidad
+              </div>
+              <button class="btn btn-primary" (click)="agregarADetalle()">Agregar</button>
+            </div>
+            <div class="col-xs-2">
+              <h2>
+                <span class="badge badge-secondary">Total: {{total | currency: 'S/ '}}</span>
+              </h2>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <hr>
+    <div *ngIf="detalle.length > 0">
+
+      <table class="table table-striped" [mfData]="detalle" #mf="mfDataTable" [mfRowsOnPage]="5">
+        <thead>
+          <tr>
+            <th colspan="3">
+              <input class="form-control" [(ngModel)]="filterQuery" placeholder="Buscar en esta lista" />
+            </th>
+          </tr>
+          <tr>
+            <th>
+              #
+            </th>
+            <th>
+              <mfDefaultSorter by="plato.nombre">Plato</mfDefaultSorter>
+            </th>
+            <th class="text-center">
+              <mfDefaultSorter by="plato.precio">Precio</mfDefaultSorter>
+            </th>
+            <th class="text-center">
+              <mfDefaultSorter by="cantidad">Cantidad</mfDefaultSorter>
+            </th>
+            <th class="text-center">
+              Total
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let det of mf.data; let i = index" [attr.data-index]="i">
+            <td>{{i + 1}}</td>
+            <td>{{det.plato.nombre | uppercase}}</td>
+            <td class="text-center">{{det.plato.precio | currency: 'S/ '}}</td>
+            <td class="text-center">{{det.cantidad}}</td>
+            <td class="text-center">{{(det.cantidad * det.plato.precio) | currency: 'S/ '}}</td>
+            <td>
+              <button type="button" (click)="removerDetalle(det)" class="btn btn-danger btn-xs">Remover</button>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+      <button class="btn btn-danger" (click)="limpiarDetalle()">Limpiar</button>
+      <app-confirm-modal [titulo]="'Pedido'" [labelBoton]="'Enviar Pedido'" (estaConfirmado)="confirmar($event)"></app-confirm-modal>
+    </div>
+  </div>
