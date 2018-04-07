@@ -8,6 +8,7 @@ import { PlatoComponent } from './plato/plato.component';
 import { PlatoInicioComponent } from './plato/plato-inicio/plato-inicio.component';
 import { LoginComponent } from './login/login.component';
 import { LoginGuard } from './_service/login-guard.service';
+import { PerfilComponent } from './perfil/perfil.component';
 
 const appRoutes: Routes = [
     {
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     { path: 'consulta', component: ConsultaComponent, canActivate: [LoginGuard] },
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
+    { path: 'perfil/:id', component: PerfilComponent, canActivate: [LoginGuard] },
 ]
 
 @NgModule({

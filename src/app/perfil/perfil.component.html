@@ -1,0 +1,19 @@
+<div *ngIf="!error">
+  <div class="row">
+    <h1>{{tienda.nombre}}</h1>
+  </div>
+  <img [src]="tienda.fotoUrl" class="img-thumbnail" />
+  <div class="row">
+    <p>{{tienda.direccion}}</p>
+  </div>
+  <div class="row">
+    <button class="btn btn-default btn-lg" (click)="btnEdt_click($event)">Editar</button>
+    <button class="btn btn-danger btn-lg" (click)="btnCnl_click($event)">Cancelar</button>
+  </div>
+</div>
+<div *ngIf="error">
+  <div class="alert alert-warning" role="alert">
+    <strong>Advertencia</strong> {{error}}.
+    <button class="btn btn-danger btn-lg" (click)="btnCnl_click($event)">Cancelar</button>
+  </div>
+</div>

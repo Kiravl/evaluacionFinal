@@ -36,6 +36,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { SimpleModalComponent } from './componentes/modal/simple-modal/simple-modal.component';
 import { LoginComponent } from './login/login.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilEditarComponent } from './perfil/perfil-editar/perfil-editar.component';
+import { TiendaService } from './_service/tienda.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ConfirmModalComponent,
     DatePickerComponent,
     SimpleModalComponent,
-    LoginComponent
+    LoginComponent,
+    PerfilComponent,
+    PerfilEditarComponent
   ],
   imports: [
     BrowserModule,
@@ -66,10 +71,14 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     Ng2CompleterModule,
     ModalModule.forRoot(),
     TabsModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    ModalModule.forRoot()
+  ],
+  entryComponents: [
+    PerfilEditarComponent
   ],
   providers: [ {provide: LocationStrategy, useClass: HashLocationStrategy},
-    PlatoService, ConsumoService, ConsultaService, ClienteService, LoginService, LoginGuard ],
+    PlatoService, ConsumoService, ConsultaService, ClienteService, LoginService, LoginGuard, TiendaService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

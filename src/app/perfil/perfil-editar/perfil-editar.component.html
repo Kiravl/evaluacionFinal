@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form name="frmEdt" #frmEdt="ngForm" (ngSubmit)="frmEdt.form.valid && submit()">
+<div class="modal-body">
+  <div class="form-group" [ngClass]="{'has-error': txtImg.dirty && txtImg.invalid}">
+    <label for="txtImg">Imagen</label>
+    <input [(ngModel)]="tienda.fotoUrl" name="txtImg" type="text" required class="form-control" #txtImg="ngModel" />
+    <div [hidden]="txtImg.pristine || txtImg.valid" class="alert alert-danger">
+      Debe ingresar una imagen;
+    </div>
+  </div>
+  <div class="form-group" [ngClass]="{'has-error': txtDir.dirty && txtImg.invalid}">
+    <label for="txtDir">Direccion</label>
+    <textarea [(ngModel)]="tienda.direccion" name="txtDir" class="form-control" required #txtDir="ngModel"></textarea>
+    <div [hidden]="txtDir.pristine || txtDir.valid" class="alert alert-danger">
+      Debe ingresar una dirección;
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+  <button type="submit" class="btn btn-default" [disabled]="!frmEdt.form.valid">Guardar</button>
+</div>
+</form>

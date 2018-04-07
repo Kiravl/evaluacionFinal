@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   mensaje: string; 
+  busy: boolean;
   
   constructor(private router: Router, private loginService: LoginService) { }
 
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   iniciarSesion(form: NgForm) {
+    this.busy = true;
     let nombre_usuario = form.value.usuario;
     let contrasena = form.value.clave;
 
@@ -30,6 +32,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['plato']);
       }
     }, err => {
+      console.log(err);
+      this.busy = false;
       this.mensaje = "Credenciales incorrectas";
     });    
   }
