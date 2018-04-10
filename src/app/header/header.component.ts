@@ -8,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  tiendaId: string = "5abae2bc30885bbd1eff733c";
+  tiendaId: string;
 
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
+    this.tiendaId = sessionStorage.tienda;
   }
 
   cerrarSesion(){

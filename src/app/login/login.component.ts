@@ -3,6 +3,8 @@ import { LoginService } from './../_service/login.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Tienda } from '../_model/tienda';
+import { TiendaService } from '../_service/tienda.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(nombre_usuario, contrasena).subscribe(data => {
       let token = JSON.stringify(data);
       sessionStorage.setItem("access_token", token);
-
+      sessionStorage.setItem("tienda", "5abae2bc30885bbd1eff733c");
       if (data) {
         this.router.navigate(['plato']);
       }

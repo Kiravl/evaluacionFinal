@@ -40,7 +40,7 @@
                     </label>
                     {{mensaje}}
                   </div>
-                  <button class="btn btn-primary btn-lg" [disabled]="busy" type="submit">Iniciar</button>
+                  <button class="btn btn-primary btn-lg" [disabled]="!f.valid || busy" type="submit">Iniciar</button>
                 </form>
               </div>
             </div>

@@ -26,7 +26,6 @@ export class PerfilComponent implements OnInit {
     this.tndSrv.tienda.subscribe(data => {
       this.tienda = data;
     }, error => {
-      console.log(error);
       this.error = error.statusText;
     });
     this.route.params.subscribe((params: Params) => {

@@ -22,7 +22,7 @@ export class PerfilEditarComponent implements OnInit {
     this.tndSrv.get(this.id).subscribe(data => {
       this.tienda = data;
     }, error => {
-      this.bsModalRef.hide();
+      setTimeout(() => this.bsModalRef.hide(), 999);
     });
   }
 
